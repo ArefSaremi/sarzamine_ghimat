@@ -24,10 +24,10 @@ class _GetDataState extends State<GetData> {
 
   void goToMainScreen() async {
     setState(() {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
         return MainScreen(
-          carPrice: carPrice,
           coinPrice: coinPrice,
+          carPrice: carPrice,
         );
       }));
     });
@@ -39,9 +39,8 @@ class _GetDataState extends State<GetData> {
       for (int adad in carPosition.values) {
         var decodedData = jsonDecode(response.body);
         String carLastPrice = decodedData[adad]['price'];
-        setState(() {
-          carPrice.add(carLastPrice);
-        });
+
+        carPrice.add(carLastPrice);
 
         print(carLastPrice);
       }
@@ -60,9 +59,8 @@ class _GetDataState extends State<GetData> {
       if (response.statusCode == 200) {
         var decodedData = jsonDecode(response.body);
         String coinLastPrice = decodedData['lastTradePrice'];
-        setState(() {
-          coinPrice.add(coinLastPrice);
-        });
+
+        coinPrice.add(coinLastPrice);
 
         print(coinLastPrice);
       } else {
